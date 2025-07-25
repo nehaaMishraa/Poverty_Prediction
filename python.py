@@ -6,6 +6,7 @@ import seaborn as sns
 from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn.metrics import mean_squared_error, r2_score
 from xgboost import XGBRegressor
+import joblib
 import warnings
 warnings.filterwarnings("ignore")
 
@@ -72,6 +73,10 @@ grid_search.fit(X_train, y_train)
 # STEP 10: Retrieve the best model
 best_model = grid_search.best_estimator_
 print("✅ Best Parameters Found:", grid_search.best_params_)
+
+# NEW: Save the best model to a file
+joblib.dump(best_model, 'poverty_prediction_model.pkl')
+print("✅ Model saved as 'poverty_prediction_model.pkl'")
 
 # STEP 11: Evaluate the best model
 y_pred = best_model.predict(X_test)
